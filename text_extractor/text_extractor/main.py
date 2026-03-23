@@ -4,12 +4,13 @@ import process_pdf
 
 
 def main():
-    file_patch = process_pdf.extract_pdf_to_img()
-    # hugging_face.extract_img(file_patch)
+    file_patch = process_pdf.extract_pdf_to_text()
+    if file_patch is str:
+        hugging_face.extract_img(file_patch)
 
 
 if __name__ == "__main__":
-    print("run main")
+    print("App running...")
     main()
 
 

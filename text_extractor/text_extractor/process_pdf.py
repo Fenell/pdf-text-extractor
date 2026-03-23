@@ -4,14 +4,14 @@ from PIL import Image
 import fitz
 from pathlib import Path
 
-FILE_TEST = "hd_test.pdf"
+FILE_TEST = "hd.pdf"
 BASE_DIR = Path(__file__).resolve().parent.parent
 IMG_PROCCESS = f"{BASE_DIR}/tests/outputs/img_pdf.jpg"
 
 
 def get_path_file_test():
     file_patch = f"{BASE_DIR}/tests/inputs/{FILE_TEST}"
-    print(file_patch)
+    # print(file_patch)
     return file_patch
 
 
@@ -30,14 +30,19 @@ def extract_pdf_to_img():
     return IMG_PROCCESS
 
 
-# with pdfplumber.open(FILE_PATCH) as pdf:
-#     first_page = pdf.pages[0]
-#     content = first_page.extract_text()
-#     if content is None or content.strip() == "":
-#         print("ok")
-#         extract_pdf_to_img()
-#     else:
-#         with open("text_extractor/content.txt", "w") as file:
-#             file.write(content)
+def extract_pdf_to_text():
+    file_patch = get_path_file_test()
 
-#     pdf.close()
+    with pdfplumber.open(file_patch) as pdf:
+        first_page = pdf.pages[0]
+        content = first_page.extract_text()
+        if content is None or content.strip() == "":
+            print("extract img")
+            return extract_pdf_to_img()
+        else:
+            path_output = get_output_path()
+            with open(path_output, "w") as file:
+                file.write(content)
+            print("Extract done.")
+
+        pdf.close()
