@@ -1,0 +1,5 @@
+/.DS_Store
+/text_extractor_env
+outputs/
+/__pycache__
+*.pyc
